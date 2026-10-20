@@ -1,14 +1,10 @@
 from flask import Flask, render_template, request, redirect, url_for, flash
-<<<<<<< HEAD
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
-=======
->>>>>>> f5d6475555286959d5dae3d5c55c50c0ba1cec21
 import json
 import os
 import uuid
 
 app = Flask(__name__)
-<<<<<<< HEAD
 app.secret_key = "gaming_secret_123_super_secure"
 
 # --- Login Setup ---
@@ -30,9 +26,6 @@ def load_user(user_id):
         return User(user_id)
     return None
 # -------------------
-=======
-app.secret_key = "gaming_secret_123"
->>>>>>> f5d6475555286959d5dae3d5c55c50c0ba1cec21
 
 DATA_FILE = "database.json"
 UPLOAD_FOLDER = "static/images"
@@ -67,7 +60,6 @@ def category(cat_type):
         all_items = [item for item in all_items if item.get("type") == cat_type]
     return render_template("index.html", items=all_items, show_form=False, active_tab=cat_type)
 
-<<<<<<< HEAD
 # --- Login aur Logout Routes ---
 @app.route("/login", methods=["GET", "POST"])
 def login():
@@ -94,10 +86,7 @@ def logout():
 # -------------------------------
 
 @app.route("/add", methods=["GET", "POST"])
-@login_required # Sirf admin hi add kar sakta hai
-=======
-@app.route("/add", methods=["GET", "POST"])
->>>>>>> f5d6475555286959d5dae3d5c55c50c0ba1cec21
+@login_required 
 def add_item():
     if request.method == "POST":
         title = request.form.get("title")
@@ -137,10 +126,7 @@ def add_item():
     return render_template("index.html", items=load_data(), show_form=True, active_tab="add")
 
 @app.route("/delete/<int:item_id>")
-<<<<<<< HEAD
-@login_required # Sirf admin hi delete kar sakta hai
-=======
->>>>>>> f5d6475555286959d5dae3d5c55c50c0ba1cec21
+@login_required
 def delete_item(item_id):
     all_items = load_data()
     item_to_delete = next((item for item in all_items if item["id"] == item_id), None)
@@ -163,9 +149,5 @@ def delete_item(item_id):
     return redirect(url_for("home"))
 
 if __name__ == "__main__":
-<<<<<<< HEAD
     port = int(os.environ.get("PORT", 5000))
     app.run(host="0.0.0.0", port=port)
-=======
-    app.run(host="127.0.0.1", port=5000, debug=True)
->>>>>>> f5d6475555286959d5dae3d5c55c50c0ba1cec21
